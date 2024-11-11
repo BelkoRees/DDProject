@@ -1,0 +1,50 @@
+.menu-container {
+    display: flex;
+    align-items: center;
+    background-color: #1c1c1c;
+    padding: 10px 20px;
+    color: white;
+  }
+  
+  .menu-logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-right: auto;
+  }
+  
+  .menu-item {
+    margin: 0 20px;
+    cursor: pointer;
+  }
+  
+  .menu-profile {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+  }
+  
+  .profile-icon {
+    font-size: 1.5em;
+    margin-right: 10px;
+  }
+  
+  .profile-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .profile-name {
+    font-size: 0.9em;
+  }
+  
+  .profile-login {
+    font-size: 0.75em;
+    color: #aaa;
+  }
+  
+  .menu-icon {
+    font-size: 1.3em;
+    margin-left: 20px;
+    cursor: pointer;
+  }
+  

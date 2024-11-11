@@ -1,0 +1,40 @@
+.main-page {
+    text-align: center;
+  }
+  
+  .main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #f8f9fa;
+  }
+  
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .login-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .login-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .image-container {
+    margin-top: 20px;
+  }
+  
+  .main-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
