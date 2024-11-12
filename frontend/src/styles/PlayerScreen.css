@@ -1,0 +1,30 @@
+.player-screen-container {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .inventory-section {
+    width: 20%;
+    background-color: #d3d3d3;
+  }
+  
+  .main-section {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .chat-section {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #f0f0f0;
+  }
+  
+  .dice-roller-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #d3d3d3;
+    padding: 10px;
+  }
+  
