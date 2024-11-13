@@ -1,7 +1,8 @@
 import React from 'react';
 import Inventory from './Inventory';
-import DiceRoller from './DiceRoller';
-import ChatBox from './ChatBox';
+//import DiceRoller from './DiceRoller';
+//import ChatBox from './ChatBox';
+import ChatApp from './ChatApp';
 import '../styles/PlayerScreen.css';
 
 const PlayerScreen = () => {
@@ -11,12 +12,7 @@ const PlayerScreen = () => {
         <Inventory />
       </div>
       <div className="main-section">
-        <div className="chat-section">
-          <ChatBox />
-        </div>
-        <div className="dice-roller-section">
-          <DiceRoller />
-        </div>
+        <ChatApp />
       </div>
     </div>
   );

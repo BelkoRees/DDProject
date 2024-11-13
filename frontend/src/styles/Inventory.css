@@ -1,0 +1,76 @@
+.edit-button, .delete-button, .save-button {
+    margin-left: 5px;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  
+  .save-button {
+    color: green;
+  }
+
+  .inventory-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .inventory-items {
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-sizing: border-box;
+    max-width: 95%;
+    word-wrap: break-word; 
+    overflow-wrap: break-word;
+  }
+  
+  .input-section {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .icon {
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+  } 
+  
+  .Coins {
+    display: flex;
+  }
+
+  .counter-section{
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 74px;
+    height: 59px;
+    border: 1px solid #ccc;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  
+  .counter-section button{
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    background-color: transparent;
+  }
+
+  .text {
+    display: flex;
+    gap: 5px;
+  }
+
+  .number {
+    font-size: 20px;
+    width: 64px;
+    height: 24px;
+    text-align: center;
+  }
+  
