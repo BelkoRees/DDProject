@@ -1,0 +1,55 @@
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20%;
+    height: 100%;
+    background-color: #f1f1f1;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+  }
+  
+  .menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    background-color: #ddd;
+    font-size: 14px;
+  }
+  
+  .close-button {
+    display: flex;
+    background-color: #ff4d4d;
+    padding: 8px 12px;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .close-button:hover {
+    background-color: #ff1a1a;
+  }
+  
+  .menu-footer {
+    margin-top: auto;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .exit-button {
+    background-color: #4CAF50;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .exit-button:hover {
+    background-color: #45a049;
+  }

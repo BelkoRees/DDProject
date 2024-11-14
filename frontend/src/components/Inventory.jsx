@@ -4,6 +4,8 @@ import Cross from '../assets/icons/cross.svg';
 import Edit from '../assets/icons/UserEdit.svg';
 import PlusIcon from '../assets/icons/Plus.svg';
 import MinusIcon from '../assets/icons/Minus.svg';
+import SideMenu from './SideMenu';
+import MenuIcon from '../assets/icons/menu.svg';
 
 const Inventory = () => {
   const [items, setItems] = useState([]);
@@ -14,6 +16,7 @@ const Inventory = () => {
   const [counter2, setCounter2] = useState(0);
   const [counter3, setCounter3] = useState(0);
   const [counter4, setCounter4] = useState(0);
+  const [showMenu, setShowMenu] = useState(false);
 
   const handleAddItem = () => {
     if (newItem.trim() !== '') {
@@ -89,7 +92,13 @@ const Inventory = () => {
 
   return (
     <div className="inventory-container">
-      <h3>Инвентарь</h3>
+      <div className="inventory-header">
+        <h3>Инвентарь</h3>
+        <button onClick={() => setShowMenu(true)} className="menu-button">
+          <img src={MenuIcon} alt="Menu" />
+        </button>
+
+      </div>
       <div className="inventory-items" style={{ height: '700px', overflowY: 'auto' }}>
         <ul className="inventory-list">
           {items.map((item, i) => (
@@ -154,7 +163,7 @@ const Inventory = () => {
             <button onClick={decrementCounter2}>
               <img src={MinusIcon} alt="Minus" />
             </button>
-            <p>мм</p>
+            <p>cм</p>
             <button onClick={incrementCounter2}>
               <img src={PlusIcon} alt="Plus" />
             </button>
@@ -166,7 +175,7 @@ const Inventory = () => {
             <button onClick={decrementCounter3}>
               <img src={MinusIcon} alt="Minus" />
             </button>
-            <p>мм</p>
+            <p>зм</p>
             <button onClick={incrementCounter3}>
               <img src={PlusIcon} alt="Plus" />
             </button>
@@ -178,7 +187,7 @@ const Inventory = () => {
             <button onClick={decrementCounter4}>
               <img src={MinusIcon} alt="Minus" />
             </button>
-            <p>мм</p>
+            <p>пм</p>
             <button onClick={incrementCounter4}>
               <img src={PlusIcon} alt="Plus" />
             </button>
@@ -186,7 +195,7 @@ const Inventory = () => {
         </div>
       </div>
 
-      
+      {showMenu && <SideMenu onClose={() => setShowMenu(false)} />}
     </div>
   );
 };

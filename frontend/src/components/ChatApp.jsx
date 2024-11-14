@@ -1,21 +1,24 @@
 import React, { useState } from 'react';
+import '../styles/ChatApp.css';
 
 const ChatApp = () => {
   const [messages, setMessages] = useState([]); // Состояние для хранения сообщений
   const [input, setInput] = useState(''); // Состояние для хранения текста в поле ввода
+  const [diceCount, setDiceCount] = useState(1); // Количество бросков
+  const [modifier, setModifier] = useState(0); // Модификатор к результату
 
   // Функция для отправки сообщения
   const handleSendMessage = () => {
     if (input.trim()) {
-      setMessages([...messages, input]); // Добавляем новое сообщение в список сообщений
-      setInput(''); // Очищаем поле ввода
+      setMessages([...messages, input]);
+      setInput('');
     }
   };
 
   // Функция для обработки нажатия клавиши Enter
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
-      handleSendMessage(); // Отправляем сообщение при нажатии Enter
+      handleSendMessage();
     }
   };
 
@@ -24,23 +27,41 @@ const ChatApp = () => {
     return Math.floor(Math.random() * max) + 1;
   };
 
-  // Функция для обработки броска кубика и отправки результата в чат
+  // Функция для обработки броска кубика с количеством бросков и модификатором
   const handleDiceRoll = (sides) => {
-    const rollResult = rollDice(sides);
-    setMessages([...messages, `Бросок d${sides}: ${rollResult}`]); // Отправляем результат броска в чат
+    let total = 0;
+    let details = [];
+
+    for (let i = 0; i < diceCount; i++) {
+      const rollResult = rollDice(sides);
+      total += rollResult;
+      details.push(rollResult);
+    }
+
+    total += modifier;
+    const detailsString = `${total} (${details.join(' + ')}${modifier ? ` + ${modifier}` : ''})`;
+
+    setMessages([...messages, `Бросок ${diceCount}d${sides} + ${modifier}: ${detailsString}`]);
   };
 
+  // Функции для управления количеством кубов и модификатором
+  const increaseDiceCount = () => setDiceCount(diceCount + 1);
+  const decreaseDiceCount = () => setDiceCount(diceCount > 1 ? diceCount - 1 : 1);
+
+  const increaseModifier = () => setModifier(modifier + 1);
+  const decreaseModifier = () => setModifier(modifier > 0 ? modifier - 1 : 0);
+
   return (
-    <div style={{ display: 'flex', height: '100vh' }}>
+    <div className="chat-app-container">
       {/* Окно чата с сообщениями */}
-      <div style={{ flex: 1, borderRight: '1px solid #ccc', padding: '10px', overflowY: 'auto' }}>
+      <div className="chat-window">
         <h2>Чат</h2>
-        <div style={{ maxHeight: '80vh', overflowY: 'auto' }}>
+        <div className="messages-container">
           {messages.length === 0 ? (
             <p>Нет сообщений. Начните чат!</p>
           ) : (
             messages.map((message, index) => (
-              <div key={index} style={{ padding: '8px', borderBottom: '1px solid #ddd' }}>
+              <div key={index} className="message-item">
                 {message}
               </div>
             ))
@@ -49,7 +70,7 @@ const ChatApp = () => {
       </div>
 
       {/* Окно для ввода сообщения и кнопок с кубиками */}
-      <div style={{ width: '300px', padding: '10px' }}>
+      <div className="input-container">
         <h2>Введите сообщение</h2>
         <textarea
           value={input}
@@ -57,78 +78,43 @@ const ChatApp = () => {
           onKeyDown={handleKeyPress}
           placeholder="Введите сообщение"
           rows="4"
-          style={{ width: '100%', padding: '10px', fontSize: '16px' }}
+          className="input-textarea"
         />
-        <button
-          onClick={handleSendMessage}
-          style={{
-            width: '100%',
-            padding: '10px',
-            backgroundColor: '#4CAF50',
-            color: 'white',
-            border: 'none',
-            fontSize: '16px',
-            cursor: 'pointer',
-            marginTop: '10px',
-          }}
-        >
+        <button onClick={handleSendMessage} className="send-button">
           Отправить
         </button>
 
+        {/* Настройки для броска кубиков */}
+        <div className="dice-settings">
+          <h3>Настройки броска</h3>
+          <div className="settings-row">
+            <button onClick={decreaseDiceCount} className="adjust-button">-</button>
+            <span className="settings-value">{diceCount}</span>
+            <button onClick={increaseDiceCount} className="adjust-button">+</button>
+            <span className="settings-label">Количество кубов</span>
+          </div>
+          <div className="settings-row">
+            <button onClick={decreaseModifier} className="adjust-button">-</button>
+            <span className="settings-value">{modifier}</span>
+            <button onClick={increaseModifier} className="adjust-button">+</button>
+            <span className="settings-label">Модификатор</span>
+          </div>
+        </div>
+
         {/* Кнопки для броска кубиков */}
-        <div style={{ marginTop: '10px' }}>
-          <button
-            onClick={() => handleDiceRoll(4)}
-            style={buttonStyle}
-          >
-            d4
-          </button>
-          <button
-            onClick={() => handleDiceRoll(6)}
-            style={buttonStyle}
-          >
-            d6
-          </button>
-          <button
-            onClick={() => handleDiceRoll(10)}
-            style={buttonStyle}
-          >
-            d10
-          </button>
-          <button
-            onClick={() => handleDiceRoll(12)}
-            style={buttonStyle}
-          >
-            d12
-          </button>
-          <button
-            onClick={() => handleDiceRoll(20)}
-            style={buttonStyle}
-          >
-            d20
-          </button>
-          <button
-            onClick={() => handleDiceRoll(100)}
-            style={buttonStyle}
-          >
-            d100
-          </button>
+        <div className="dice-buttons">
+          {['d4', 'd6', 'd10', 'd12', 'd20', 'd100'].map((dice) => {
+            const sides = parseInt(dice.slice(1), 10);
+            return (
+              <button key={dice} onClick={() => handleDiceRoll(sides)} className="dice-button">
+                {dice}
+              </button>
+            );
+          })}
         </div>
       </div>
     </div>
   );
-};
-
-// Стиль для кнопок кубиков
-const buttonStyle = {
-  width: '48%',
-  padding: '10px',
-  backgroundColor: '#2196F3',
-  color: 'white',
-  border: 'none',
-  fontSize: '16px',
-  cursor: 'pointer',
-  margin: '5px 1%',
 };
 
 export default ChatApp;
