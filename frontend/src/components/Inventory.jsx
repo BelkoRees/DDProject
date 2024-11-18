@@ -16,7 +16,7 @@ const Inventory = () => {
   const [counter2, setCounter2] = useState(0);
   const [counter3, setCounter3] = useState(0);
   const [counter4, setCounter4] = useState(0);
-  const [showMenu, setShowMenu] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);  // Меню скрыто по умолчанию
 
   const handleAddItem = () => {
     if (newItem.trim() !== '') {
@@ -94,12 +94,12 @@ const Inventory = () => {
     <div className="inventory-container">
       <div className="inventory-header">
         <h3>Инвентарь</h3>
+        {/* Кнопка для открытия бокового меню */}
         <button onClick={() => setShowMenu(true)} className="menu-button">
           <img src={MenuIcon} alt="Menu" />
         </button>
-
       </div>
-      <div className="inventory-items" style={{ height: '700px', overflowY: 'auto' }}>
+      <div className="inventory-items">
         <ul className="inventory-list">
           {items.map((item, i) => (
             <li key={i} className="inventory-item">
@@ -132,7 +132,7 @@ const Inventory = () => {
           ))}
         </ul>
       </div>
-      
+
       <div className="input-section">
         <input
           type="text"
@@ -144,7 +144,7 @@ const Inventory = () => {
         <button onClick={handleAddItem}>Добавить</button>
       </div>
 
-      <div className='Coins'>
+      <div className="Coins">
         <div className="counter-section">
           <div className="number">{counter1}</div>
           <div className="text">
@@ -195,6 +195,7 @@ const Inventory = () => {
         </div>
       </div>
 
+      {/* Показать меню только если состояние showMenu истинно */}
       {showMenu && <SideMenu onClose={() => setShowMenu(false)} />}
     </div>
   );

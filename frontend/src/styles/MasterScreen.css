@@ -1,0 +1,17 @@
+.master-screen-container {
+    display: flex;
+    height: 100hv;
+    overflow: hidden; /* Убирает скролл */
+  }
+  
+  .inventory-section {
+    width: 20%;
+    background-color: #FCE1AB;
+  }
+  
+  .main-section {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+  }
+  

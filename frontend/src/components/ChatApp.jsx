@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import '../styles/ChatApp.css';
+import ProfileModal from './ProfileModal'; 
 
-const ChatApp = () => {
+const ChatApp = ({ nickname }) => {
   const [messages, setMessages] = useState([]); // Состояние для хранения сообщений
   const [input, setInput] = useState(''); // Состояние для хранения текста в поле ввода
   const [diceCount, setDiceCount] = useState(1); // Количество бросков
@@ -10,8 +11,8 @@ const ChatApp = () => {
   // Функция для отправки сообщения
   const handleSendMessage = () => {
     if (input.trim()) {
-      setMessages([...messages, input]);
-      setInput('');
+      setMessages([...messages, { text: input, sender: nickname }]); // Добавляем сообщение с никнеймом
+      setInput(''); // Очищаем поле ввода
     }
   };
 
@@ -41,7 +42,10 @@ const ChatApp = () => {
     total += modifier;
     const detailsString = `${total} (${details.join(' + ')}${modifier ? ` + ${modifier}` : ''})`;
 
-    setMessages([...messages, `Бросок ${diceCount}d${sides} + ${modifier}: ${detailsString}`]);
+    setMessages([
+      ...messages,
+      { text: `Бросок ${diceCount}d${sides}${modifier !== 0 ? ` + ${modifier}` : ''}: ${detailsString}`, sender: nickname }, // Добавляем бросок с никнеймом
+    ]);
   };
 
   // Функции для управления количеством кубов и модификатором
@@ -62,7 +66,7 @@ const ChatApp = () => {
           ) : (
             messages.map((message, index) => (
               <div key={index} className="message-item">
-                {message}
+                <strong>{message.sender}:</strong> {message.text}
               </div>
             ))
           )}
@@ -71,46 +75,48 @@ const ChatApp = () => {
 
       {/* Окно для ввода сообщения и кнопок с кубиками */}
       <div className="input-container">
-        <h2>Введите сообщение</h2>
-        <textarea
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={handleKeyPress}
-          placeholder="Введите сообщение"
-          rows="4"
-          className="input-textarea"
-        />
-        <button onClick={handleSendMessage} className="send-button">
-          Отправить
-        </button>
-
         {/* Настройки для броска кубиков */}
         <div className="dice-settings">
-          <h3>Настройки броска</h3>
-          <div className="settings-row">
-            <button onClick={decreaseDiceCount} className="adjust-button">-</button>
-            <span className="settings-value">{diceCount}</span>
-            <button onClick={increaseDiceCount} className="adjust-button">+</button>
-            <span className="settings-label">Количество кубов</span>
+          <h3>Бросьте куб</h3>
+          <div className="dice-buttons">
+            {['d4', 'd6', 'd10', 'd12', 'd20', 'd100'].map((dice) => {
+              const sides = parseInt(dice.slice(1), 10);
+              return (
+                <button key={dice} onClick={() => handleDiceRoll(sides)} className="dice-button">
+                  {dice}
+                </button>
+              );
+            })}
           </div>
-          <div className="settings-row">
-            <button onClick={decreaseModifier} className="adjust-button">-</button>
-            <span className="settings-value">{modifier}</span>
-            <button onClick={increaseModifier} className="adjust-button">+</button>
-            <span className="settings-label">Модификатор</span>
+          <div className="settings-rows">
+            <div className="settings-row">
+              <button onClick={decreaseDiceCount} className="adjust-button">-</button>
+              <span className="settings-value">{diceCount}</span>
+              <button onClick={increaseDiceCount} className="adjust-button">+</button>
+              <span className="settings-label">Количество кубов</span>
+            </div>
+            <div className="settings-row">
+              <button onClick={decreaseModifier} className="adjust-button">-</button>
+              <span className="settings-value">{modifier}</span>
+              <button onClick={increaseModifier} className="adjust-button">+</button>
+              <span className="settings-label">Модификатор</span>
+            </div>
           </div>
         </div>
 
-        {/* Кнопки для броска кубиков */}
-        <div className="dice-buttons">
-          {['d4', 'd6', 'd10', 'd12', 'd20', 'd100'].map((dice) => {
-            const sides = parseInt(dice.slice(1), 10);
-            return (
-              <button key={dice} onClick={() => handleDiceRoll(sides)} className="dice-button">
-                {dice}
-              </button>
-            );
-          })}
+        <div className="chat-settings">
+          <h3>Введите сообщение</h3>
+          <textarea
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={handleKeyPress}
+            placeholder="Введите сообщение"
+            rows="4"
+            className="input-textarea"
+          />
+          <button onClick={handleSendMessage} className="send-button">
+            Отправить
+          </button>
         </div>
       </div>
     </div>

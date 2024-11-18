@@ -1,13 +1,12 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; // Импортируем хук
+import { useNavigate } from 'react-router-dom';
 import '../styles/SideMenu.css';
 
-function SideMenu({ onClose }) {
-  const navigate = useNavigate(); // Инициализируем хук навигации
+function SideMenu({ onClose, onEditProfile }) {
+  const navigate = useNavigate(); // Инициализация хука для навигации
 
   const handleExit = () => {
-    // Навигация на главную страницу
-    navigate('/');
+    navigate('/'); // Навигация на главную страницу
   };
 
   return (
@@ -16,6 +15,13 @@ function SideMenu({ onClose }) {
         <h2>Меню</h2>
         <button className="close-button" onClick={onClose}>Закрыть</button>
       </div>
+
+      <div className="menu-body">
+        <button className="edit-profile-button" onClick={onEditProfile}>
+          Редактировать профиль
+        </button>
+      </div>
+
       <div className="menu-footer">
         <button className="exit-button" onClick={handleExit}>Выйти из игры</button>
       </div>

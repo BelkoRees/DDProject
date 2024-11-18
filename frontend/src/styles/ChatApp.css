@@ -1,14 +1,33 @@
-/* ChatApp.css */
-
 .chat-app-container {
   display: flex;
   flex-direction: column;
   height: 100vh;
   font-family: Arial, sans-serif;
+  width: 100%;
+}
+
+.dice-settings,
+.chat-settings {
+  flex: 1; /* Элементы равномерно растягиваются */
+}
+
+.dice-settings {
+  margin-right: 20px;
+}
+
+.settings-rows {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+
+.input-container {
+  display: flex;
+  margin-top: 16px;
 }
 
 .chat-window {
-  flex: 0 0 58%;
+  flex: 0 0 75%;
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 16px;
@@ -29,14 +48,6 @@
   background-color: #e6f7ff;
   border: 1px solid #b3d9ff;
   word-wrap: break-word;
-}
-
-.input-container {
-  flex: 0 0 20%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin-top: 16px;
 }
 
 .input-textarea {
@@ -69,6 +80,9 @@
   display: flex;
   align-items: center;
   margin-bottom: 8px;
+  border: 2px solid #2196F3;
+  padding: 10px;
+  border-radius: 20px;
 }
 
 .adjust-button {
@@ -96,6 +110,7 @@
 .dice-buttons {
   display: flex;
   justify-content: space-between;
+  margin-top: 20px;
 }
 
 .dice-button {

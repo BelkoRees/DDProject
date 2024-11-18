@@ -12,10 +12,14 @@
   .inventory-container {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
+    justify-content: space-between;
+    height: 100vh;
   }
   
   .inventory-items {
+    height: 700px;
+    overflow-y: auto;
     border: 1px solid #ccc;
     padding: 10px;
     box-sizing: border-box;

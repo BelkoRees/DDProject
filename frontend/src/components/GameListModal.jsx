@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import '../styles/GameListModal.css';
 import crossIcon from '../assets/icons/cross.svg';
 
-function GameListModal({ isVisible, onClose, onEnterGame }) { // Добавляем onEnterGame как пропс
+function GameListModal({ isVisible, onClose, onEnterGame }) {
   const [games, setGames] = useState([
     { title: 'Пример игры 1', description: 'Описание для игры 1', status: 'Активна', enter: 'Войти' },
     { title: 'Пример игры 2', description: 'Описание для игры 2', status: 'Завершена', enter: 'Войти' },
   ]);
-  const [newGame, setNewGame] = useState({ title: '', description: '', status: '', enter: 'Войти' });
+  const [newGame, setNewGame] = useState({ title: '', description: '', status: 'Активна', enter: 'Войти' });
   const [isAdding, setIsAdding] = useState(false);
 
   if (!isVisible) return null;
@@ -15,13 +15,13 @@ function GameListModal({ isVisible, onClose, onEnterGame }) { // Добавля�
   // Обработчик для кнопки "Войти"
   const handleEnterClick = () => {
     if (onEnterGame) {
-      onEnterGame();  // Вызываем onEnterGame переданный через пропсы
+      onEnterGame(); // Вызываем onEnterGame, переданный через пропсы
     }
   };
 
   const handleAddGame = () => {
     setGames([...games, newGame]);
-    setNewGame({ title: '', description: '', status: '', enter: 'Войти' });
+    setNewGame({ title: '', description: '', status: 'Активна', enter: 'Войти' });
     setIsAdding(false);
   };
 
@@ -83,12 +83,15 @@ function GameListModal({ isVisible, onClose, onEnterGame }) { // Добавля�
                     />
                   </td>
                   <td>
-                    <input
-                      type="text"
+                    {/* Используем select для выбора статуса */}
+                    <select
                       value={newGame.status}
                       onChange={(e) => handleInputChange(e, 'status')}
-                      placeholder="Статус игры"
-                    />
+                    >
+                      <option value="Активна">Активна</option>
+                      <option value="Завершена">Завершена</option>
+                      <option value="В процессе">В процессе</option>
+                    </select>
                   </td>
                   <td>
                     <button onClick={handleAddGame}>Добавить</button>

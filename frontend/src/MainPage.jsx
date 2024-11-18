@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './styles/MainPage.css';
 import MainImage from './assets/MainImg.png';
 import AuthModal from './components/AuthModal.jsx';
-import Menu2 from './components/Menu2.jsx';  // Импортируем Menu2
-import GameListModal from './components/GameListModal.jsx';  // Импортируем GameListModal
-import PlayerScreen from './components/PlayerScreen.jsx'; // Import the PlayerScreen component
+import Menu2 from './components/Menu2.jsx'; 
+import GameListModal from './components/GameListModal.jsx';  
 
 function MainPage() {
   const [isModalVisible, setModalVisible] = useState(false);
-  const [isPlayerScreenVisible, setIsPlayerScreenVisible] = useState(false);
   const [isGameListModalVisible, setIsGameListModalVisible] = useState(false);
+  const navigate = useNavigate();
 
   const handleLoginClick = () => {
     setModalVisible(true);
@@ -20,18 +20,13 @@ function MainPage() {
   };
 
   const handleEnterGame = () => {
-    setIsPlayerScreenVisible(true); // Set state to show PlayerScreen
-    setIsGameListModalVisible(false); // Закрыть модальное окно списка игр
+    setIsGameListModalVisible(false);
+    navigate('/player'); // Переход на страницу PlayerScreen
   };
 
   const handleOpenGameListModal = () => {
     setIsGameListModalVisible(true);
   };
-
-  // Если экран игрока активен, рендерим PlayerScreen
-  if (isPlayerScreenVisible) {
-    return <PlayerScreen />;
-  }
 
   return (
     <div className="main-page">
@@ -54,7 +49,7 @@ function MainPage() {
       <GameListModal 
         isVisible={isGameListModalVisible} 
         onClose={() => setIsGameListModalVisible(false)} 
-        onEnterGame={handleEnterGame}  // Передаем обработчик в GameListModal
+        onEnterGame={handleEnterGame}  
       />
     </div>
   );

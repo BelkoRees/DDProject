@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Cross from '../assets/icons/cross.svg'; // Иконка крестика для закрытия
 import '../styles/ProfileModal.css'; // Стили для модального окна
 
-const ProfileModal = ({ isVisible, onClose }) => {
+const ProfileModal = ({ isVisible, onClose, onSave }) => {
   const [profilePic, setProfilePic] = useState(null); // Состояние для фото профиля
   const [nickname, setNickname] = useState('');
   const [login, setLogin] = useState('');
@@ -22,6 +22,7 @@ const ProfileModal = ({ isVisible, onClose }) => {
   const handleSaveChanges = () => {
     // Логика сохранения изменений
     alert('Изменения сохранены!');
+    onSave(nickname); // Сохраняем никнейм в родительском компоненте
     onClose(); // Закрываем окно после сохранения
   };
 
